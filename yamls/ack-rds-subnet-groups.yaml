@@ -1,0 +1,19 @@
+apiVersion: rds.services.k8s.aws/v1alpha1
+kind: DBSubnetGroup
+metadata:
+  name: rds-postgresql-subnet-group
+  namespace: ack-system
+spec:
+  name: rds-postgresql-subnet-group
+  description: RDS for app in EKS
+  subnetIDs:
+    # aws eks describe-cluster --name sin-dev --region ap-southeast-1 --profile mfa | jq '.cluster.resourcesVpcConfig.subnetIds'
+    - "subnet-09b85e424032c52f6"
+    - "subnet-01da56769cc1c26e8"
+    - "subnet-034584c76fdc2fd8a"
+    - "subnet-08830b3188658a986"
+  tags:
+    - key: stage
+      value: development
+    - key: owner
+      value: dev

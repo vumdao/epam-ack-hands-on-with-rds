@@ -1,0 +1,31 @@
+# aws eks describe-cluster --name sin-dev --region ap-southeast-1 --profile mfa | jq '.cluster.resourcesVpcConfig.clusterSecurityGroupId'
+apiVersion: rds.services.k8s.aws/v1alpha1
+kind: DBInstance
+metadata:
+  name: rds-postgresql-dev
+  namespace: ack-system
+spec:
+  allocatedStorage: 20
+  autoMinorVersionUpgrade: true
+  backupRetentionPeriod: 7
+  dbInstanceClass: db.t3.micro
+  dbInstanceIdentifier: rds-postgresql-dev
+  dbSubnetGroupName: rds-postgresql-subnet-group
+  engine: postgres
+  engineVersion: "10"
+  kmsKeyID: 45565488-c3a1-4133-b19e-5fe0d6a7b932
+  masterUsername: rds_dev_master
+  masterUserPassword:
+    namespace: ack-system
+    key: password
+    name: rds-postgresql-user-creds
+  storageEncrypted: true
+  tags:
+    - key: stage
+      value: development
+    - key: owner
+      value: dev
+    - key: ack:stack-name
+      value: rds-dev
+  vpcSecurityGroupIDs:
+    - sg-0347f7a26b8289272

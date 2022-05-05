@@ -1,0 +1,17 @@
+apiVersion: kms.services.k8s.aws/v1alpha1
+kind: Key
+metadata:
+  name: rds-kms-csm-dev
+  namespace: ack-system
+spec:
+  description: RDS KMS CSM Dev
+  keySpec: SYMMETRIC_DEFAULT
+  keyUsage: ENCRYPT_DECRYPT
+  origin: AWS_KMS
+  tags:
+    - tagKey: stage
+      tagValue: development
+    - tagKey: owner
+      tagValue: dev
+    - tagKey: ack:stack-name
+      tagValue: ckm-dev

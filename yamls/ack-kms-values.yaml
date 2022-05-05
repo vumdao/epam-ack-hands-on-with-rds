@@ -1,0 +1,10 @@
+# export HELM_EXPERIMENTAL_OCI=1
+# helm pull oci://public.ecr.aws/aws-controllers-k8s/kms-chart --version=v0.0.15
+# tar xf kms-chart-v0.0.15.tgz
+# helm install --create-namespace --namespace ack-system ack-kms-controller --set aws.region=ap-southeast-1 kms-chart
+serviceAccount:
+  create: true
+  name: ack-kms-controller
+  annotations:
+    eks.amazonaws.com/role-arn: arn:aws:iam::123456789012:role/sin-ack-kms-controller-dev
+

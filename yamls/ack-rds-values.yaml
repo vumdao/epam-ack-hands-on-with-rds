@@ -1,0 +1,9 @@
+# export HELM_EXPERIMENTAL_OCI=1
+# helm pull oci://public.ecr.aws/aws-controllers-k8s/rds-chart --version=v0.0.24
+# tar xf rds-chart-v0.0.24.tgz
+# helm install --create-namespace --namespace ack-system ack-rds-controller --set aws.region=ap-southeast-1 rds-chart
+serviceAccount:
+  create: true
+  name: ack-rds-controller
+  annotations:
+    eks.amazonaws.com/role-arn: arn:aws:iam::123456789012:role/sin-ack-rds-controller-dev
